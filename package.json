@@ -2,6 +2,8 @@
   "name": "tgrok-gui",
   "version": "0.1.0",
   "private": true,
+  "author": "yueyuzhao",
+  "license": "GPL-3.0",
   "scripts": {
     "dev": "vue-cli-service serve --open",
     "serve": "vue-cli-service serve",
