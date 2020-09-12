@@ -69,7 +69,7 @@ export default Vue.extend({
     Drmer.events.removeListener("tgrok", this.onMessage);
   },
   methods: {
-    onMessage: function (_, message) {
+    onMessage: function (message) {
       const evt = message.evt;
       const payload = message.payload;
       switch (evt) {

@@ -116,9 +116,6 @@ export default Vue.extend({
     }
     const data = await Drmer.callJson("TgrokService@status");
     this.$store.commit("setStatus", data.status);
-    if (data.status === 10) {
-      this.openTunnels()
-    }
   },
   methods: {
     editTunnel: function (tunnel) {
@@ -133,7 +130,7 @@ export default Vue.extend({
     deleteTunnel: function (tunnel) {
       this.$refs.deleteDialog.show(tunnel);
     },
-    onMessage: function (event, message) {
+    onMessage: function (message) {
       const evt = message.evt;
       const payload = message.payload;
       switch (evt) {
