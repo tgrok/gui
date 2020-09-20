@@ -5,6 +5,7 @@
       clipped-left
       color="cyan"
       dark
+      :style="appbarStyle"
     >
       <v-icon>mdi-folder-network</v-icon>
       <v-toolbar-title
@@ -35,6 +36,7 @@
     <v-main>
       <v-container
         fluid
+        class="mt-5"
       >
         <v-row>
           <v-col
@@ -81,7 +83,9 @@ import TFooter from "@/components/TFooter";
 import Drmer from "@/Drmer";
 
 export default Vue.extend({
-  data: () => ({}),
+  data: () => ({
+    header: 0,
+  }),
   components: {
     TunnelCard,
     TunnelFormDialog,
@@ -95,6 +99,12 @@ export default Vue.extend({
     tunnels: function () {
       return this.$store.state.tunnels;
     },
+    appbarStyle: function () {
+      return {
+        height: `${64 + this.header}px`,
+        paddingTop: `${this.header}px`,
+      }
+    }
   },
   watch: {
     "$store.state.status": function (val) {
@@ -103,8 +113,13 @@ export default Vue.extend({
       }
     },
   },
-  beforeMount() {
+  async beforeMount() {
     Drmer.events.on("tgrok", this.onMessage);
+    const res = await Drmer.callJson("PageService@config");
+    if (!res) {
+      return
+    }
+    this.header = res.header;
   },
   beforeDestroy() {
     Drmer.events.removeListener("tgrok", this.onMessage);
