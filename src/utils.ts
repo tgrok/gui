@@ -31,3 +31,8 @@ export const parseJson = (json: string | object) => {
     return void 0;
   }
 };
+
+export const isiOS = () => {
+  const userAgent = window.navigator.userAgent.toLowerCase();
+  return userAgent.indexOf("iphone") > -1 || userAgent.indexOf("ipad") > -1;
+}

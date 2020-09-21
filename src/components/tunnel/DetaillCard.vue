@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto" :class="{ 'animate__animated animate__headShake animate__infinite	infinite': deleting }">
+  <v-card class="mx-auto" :class="{ 'animate__animated animate__headShake animate__infinite	infinite': shaking }">
     <v-list-item>
       <v-list-item-avatar :color="color" :class="{'animate__animated animate__pulse animate__infinite	infinite': changing}"></v-list-item-avatar>
       <v-list-item-content>
@@ -74,7 +74,7 @@
 
 <script>
 import Vue from "vue";
-import { timeout } from "@/utils";
+import { timeout, isiOS } from "@/utils";
 import TunnelModel from "@/components/tunnel/Model.vue"
 
 export default Vue.extend({
@@ -105,8 +105,8 @@ export default Vue.extend({
     ready: function () {
       return this.$store.state.status === 10;
     },
-    deleting: function () {
-      return this.tunnel.id === this.$store.state.deletingId
+    shaking: function () {
+      return !isiOS() && this.tunnel.id === this.$store.state.deletingId
     },
     color: function () {
       if (this.tunnel.status < 5) {
