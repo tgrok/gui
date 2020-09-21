@@ -36,7 +36,7 @@
     <v-main>
       <v-container
         fluid
-        class="mt-5"
+        :style="bodyStyle"
       >
         <v-row>
           <v-col
@@ -104,7 +104,12 @@ export default Vue.extend({
         height: `${64 + this.header}px`,
         paddingTop: `${this.header}px`,
       }
-    }
+    },
+    bodyStyle: function () {
+      return {
+        paddingTop: `${this.header + 10}px`,
+      }
+    },
   },
   watch: {
     "$store.state.status": function (val) {
