@@ -31,7 +31,6 @@
               label="Subdomain"
               v-model="tunnel.subdomain"
               persistent-hint
-              readonly
               :hint="`Your request url will be ${remoteUrl}`"
               append-icon="mdi-cached"
               @click:append="randomSubdomain"
@@ -101,6 +100,10 @@ export default Vue.extend({
     save: function () {
       this.dialog = false;
       this.$store.dispatch('editTunnel', this.tunnel)
+      if (!this.inEdit) {
+        // if this tunnel is newly created, start it right now
+        this.$store.dispatch('openTunnel', this.tunnel.id)
+      }
     },
     randomSubdomain: function () {
       this.tunnel.subdomain = Tunnel.randomDomain()

@@ -11,7 +11,7 @@ export default class Tunnel {
   public localHost = "127.0.0.1";
   public localPort = "80"
 
-  public paused = true;
+  public paused = false;
 
   public status = 0;
 
